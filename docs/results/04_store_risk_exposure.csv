@@ -1,0 +1,5 @@
+"risk_segment","store_count","customer_count","total_revenue_at_risk","avg_business_revenue_at_risk_pct"
+Critical,1,1420,27109844.26,1.28
+High,18,7751,33978311.33,0.09
+Medium,21,2779,14974029.29,0.03
+Low,30,431,2680648.52,0.00
