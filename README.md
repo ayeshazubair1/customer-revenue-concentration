@@ -111,17 +111,17 @@ Download [dataset](https://github.com/sql-bi/Contoso-Data-Generator-V2-data/rele
 
 ## Future Analysis Opportunities
 
-**1. Root Cause Analysis for Declining Customers:** Investigate why high-value customers are disengaging through customer feedback, complaint logs, or support data.
-**2. Seasonality & Purchase Behavior Analysis:** Compare declining customer behavior against holidays, promotions, and seasonal demand patterns to determine whether disengagement is temporary or structural.
-**3. Online Channel Deep Dive:** Analyze website performance, cart abandonment, and digital journey friction since the online channel holds the largest risk concentration.
+**1. Root Cause Analysis for Declining Customers:** Investigate why high-value customers are disengaging through customer feedback, complaint logs, or support data.   
+**2. Seasonality & Purchase Behavior Analysis:** Compare declining customer behavior against holidays, promotions, and seasonal demand patterns to determine whether disengagement is temporary or structural.   
+**3. Online Channel Deep Dive:** Analyze website performance, cart abandonment, and digital journey friction since the online channel holds the largest risk concentration.   
 **4. Inactive Customer Re-Acquisition Strategy:** Assess last purchase behavior, product preferences, and inactivity duration to identify which inactive customers are worth reactivation investment.
 
 ## Limitations & Assumptions
-**1. Partial 2024 Data:** The latest recorded orders end in April 2024. As a result, recency metrics may appear higher because the full year is not represented.
-**2. Churn Estimated from Behavior:** At-risk customers were identified using recency and frequency patterns, not confirmed churn records.
-**3. No External Context:** The analysis identifies who is at risk and how much revenue is exposed, but cannot fully explain why customers are disengaging without feedback or market data.
-**4. Threshold Benchmarks:** All segmentation thresholds were derived from internal data distributions, as no external industry benchmarks were available.
-**5. Synthetic Dataset:** Contoso is a fictional dataset. Additional context such as loyalty history, customer feedback, or campaign data was unavailable.
+**1. Partial 2024 Data:** The latest recorded orders end in April 2024. As a result, recency metrics may appear higher because the full year is not represented.   
+**2. Churn Estimated from Behavior:** At-risk customers were identified using recency and frequency patterns, not confirmed churn records.     
+**3. No External Context:** The analysis identifies who is at risk and how much revenue is exposed, but cannot fully explain why customers are disengaging without feedback or market data.    
+**4. Threshold Benchmarks:** All segmentation thresholds were derived from internal data distributions, as no external industry benchmarks were available.     
+**5. Synthetic Dataset:** Contoso is a fictional dataset. Additional context such as loyalty history, customer feedback, or campaign data was unavailable.    
 
 ## Project Structure
 ```
