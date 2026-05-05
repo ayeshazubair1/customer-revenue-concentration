@@ -76,11 +76,11 @@ The online channel alone holds **\$27.1M at risk** across 1,420 declining custom
 
 ## Methodology & Analytical Approach
 
-**1. Customer Summary Table:** Built as a Materialized View to support all four business questions and improve query performance.
-**2. Customer Ranking:** `ROW_NUMBER()` was used to rank customers by revenue and profit for Top 10% and Top 20% concentration analysis.
-**3. Analytical Views:** Two views were created for consistency and efficiency across questions: `high_value_customers` (top 20% by revenue) and `at_risk_customers` (Declining customer segment).
-**4. Data-Driven Segmentation:** `PERCENTILE_CONT()` was used to analyze distributions and create data-driven customer and store risk thresholds instead of arbitrary cutoffs.
-**5. Recency Reference Logic:** Recency was measured against the latest available date in the `Date` table (**Dec 31, 2024**).
+**1. Customer Summary Table:** Built as a Materialized View to support all four business questions and improve query performance.   
+**2. Customer Ranking:** `ROW_NUMBER()` was used to rank customers by revenue and profit for Top 10% and Top 20% concentration analysis.   
+**3. Analytical Views:** Two views were created for consistency and efficiency across questions: `high_value_customers` (top 20% by revenue) and `at_risk_customers` (Declining customer segment).   
+**4. Data-Driven Segmentation:** `PERCENTILE_CONT()` was used to analyze distributions and create data-driven customer and store risk thresholds instead of arbitrary cutoffs.   
+**5. Recency Reference Logic:** Recency was measured against the latest available date in the `Date` table (**Dec 31, 2024**).   
 **6. Code Modularization:** CTEs were used throughout to keep queries readable, auditable, and maintainable.
 
 ## Key Business Metrics
