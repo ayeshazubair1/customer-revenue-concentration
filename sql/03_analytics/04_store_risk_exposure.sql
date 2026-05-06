@@ -24,9 +24,8 @@
 --   - Dependency measures how much a store relies on at-risk customers
 
 -- OUTPUT:
---   Store-level risk profile including:
---     - Number of at-risk customers, Revenue at risk, % of total business revenue exposed per store,
-		 Store dependency on at-risk customers, Risk segment classification
+--   Store-level risk profile including: Number of at-risk customers, Revenue at risk, 
+--	 % of total business revenue exposed per store, Store dependency, and Risk segment
 =====================================================================================*/
 
 WITH store_lvl AS (
@@ -83,7 +82,9 @@ segmentation AS (
 	CROSS JOIN threshold
 	JOIN store_revenue sr ON sk.store_key = sr.store_key
 )
-SELECT st.country, s.*
+SELECT 
+	st.country, 
+	s.*
 	/* risk_segment,
 	COUNT(s.store_key)   AS store_count,
 	SUM(customer_count)  AS customer_count,
@@ -95,11 +96,9 @@ JOIN clean.stores st ON s.store_key = st.store_key
 ORDER BY 
 	business_revenue_at_risk_pct DESC 
 ;
-
 --==============================
 /*	Output:
 --==============================
-
 country       |store_key|customer_count|revenue_at_risk|business_revenue_at_risk_pct|dependency_pct|risk_segment
 --------------+---------+--------------+---------------+----------------------------+--------------+------------
 Online        |   999999|          1420|    27109844.26|                        1.28|          3.51|Critical    
@@ -111,7 +110,6 @@ United States |      540|           414|     2084384.09|                        
 --==============================
 *	Store Risk Summary 
 --==============================
-
 risk_segment|store_count|customer_count|total_revenue_at_risk|avg_business_revenue_at_risk_pct
 ------------+-----------+--------------+---------------------+--------------------------------
 Critical    |          1|          1420|          27109844.26|                            1.28

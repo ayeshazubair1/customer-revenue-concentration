@@ -30,7 +30,8 @@ WITH percentile AS (
 		PERCENTILE_CONT(0.50) WITHIN GROUP (ORDER BY frequency) AS p50_frequency
 	FROM analysis.high_value_customers
 )
-SELECT hvc.*
+SELECT 
+	hvc.*
 FROM analysis.high_value_customers hvc
 CROSS JOIN percentile
 WHERE recency > p75_recency
@@ -48,22 +49,20 @@ WITH totals AS (
 	FROM gold.customer_summary
 )	
 SELECT
-	COUNT(*) AS at_risk_customer_count,
-	SUM(total_revenue) AS revenue_at_risk,
+	COUNT(*) 									   AS at_risk_customer_count,
+	SUM(total_revenue) 							   AS revenue_at_risk,
 	ROUND((SUM(total_revenue) / revenue) * 100, 2) AS revenue_at_risk_pct,
-	SUM(total_profit) AS profit_at_risk,
-	ROUND((SUM(total_profit) / profit) * 100, 2) AS profit_at_risk_pct
+	SUM(total_profit) 							   AS profit_at_risk,
+	ROUND((SUM(total_profit) / profit) * 100, 2)   AS profit_at_risk_pct
 FROM analysis.at_risk_customers
 CROSS JOIN totals 
 GROUP BY 
 	revenue,
 	profit
 ;
-
 --==============================
 /*	Output:
 --==============================
-
 at_risk_customer_count|revenue_at_risk|revenue_at_risk_pct|profit_at_risk|profit_at_risk_pct
 ----------------------+---------------+-------------------+--------------+------------------
                   1421|    78742833.40|               3.71|   44201613.16|              3.73

@@ -51,7 +51,7 @@ metrics AS (
 		cs.total_revenue,
 		cs.total_profit,
 		(max_date - last_order_date) AS recency,
-		cs.total_orders AS frequency,
+		cs.total_orders 		  	 AS frequency,
 		ROUND(cs.total_revenue / cs.total_orders, 2) AS aov
 	FROM gold.customer_summary cs
 	JOIN customer_rank cr ON cs.customer_key = cr.customer_key 
@@ -83,9 +83,9 @@ segmentation AS (
 		  ELSE 'Inactive'
 		END AS segment,
 		COUNT(*) AS customer_count,
-		ROUND(AVG(aov), 2) AS avg_aov,
+		ROUND(AVG(aov), 2) 		 AS avg_aov,
 		ROUND(AVG(frequency), 2) AS avg_frequency,
-		ROUND(AVG(recency), 2) AS avg_recency
+		ROUND(AVG(recency), 2) 	 AS avg_recency
 	FROM analysis.high_value_customers
 	CROSS JOIN threshold 
 	GROUP BY segment
@@ -101,11 +101,9 @@ ORDER BY
 		ELSE 4
 	END
 ;
-
 --==============================
 /*	Output:
 --==============================
-
 segment   |customer_count|avg_aov|avg_frequency|avg_recency
 ----------+--------------+-------+-------------+-----------
 Consistent|          4599|2563.82|        23.76|     330.17

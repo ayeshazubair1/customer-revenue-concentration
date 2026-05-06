@@ -20,8 +20,7 @@
 --   - Revenue and profit concentration are evaluated independently
 
 -- OUTPUT:
---   Percentage contribution of Top 10% and Top 20% customers for both
---   revenue and profit
+--   Percentage contribution of Top 10% and Top 20% customers for both revenue and profit
 =====================================================================================*/
 
 WITH customer_rank AS (
@@ -29,8 +28,8 @@ WITH customer_rank AS (
 		customer_key,
 		total_revenue,
 		total_profit,
-		ROW_NUMBER() OVER(ORDER BY total_revenue DESC) rn_revenue,
-		ROW_NUMBER() OVER(ORDER BY total_profit DESC)  rn_profit
+		ROW_NUMBER() OVER(ORDER BY total_revenue DESC) AS rn_revenue,
+		ROW_NUMBER() OVER(ORDER BY total_profit  DESC) AS rn_profit
 	FROM gold.customer_summary 
 ),
 threshold AS (
@@ -53,7 +52,7 @@ SELECT
 				revenue * 100, 2) AS revenue_contribution_pct,
 	ROUND(SUM(CASE 
 				WHEN rn_profit <= ten_pct THEN total_profit END) / 
-				profit * 100, 2) AS profit_contribution_pct
+				profit * 100, 2)  AS profit_contribution_pct
 FROM customer_rank 
 CROSS JOIN totals 
 CROSS JOIN threshold 
@@ -81,11 +80,9 @@ GROUP BY
 	revenue,
 	profit
 ;
-
 --==============================
 /*	Output:
 --==============================
-
 segment|customer_count|revenue_contribution_pct|profit_contribution_pct
 -------+--------------+------------------------+-----------------------
 Top 10%|          8787|                   25.72|                  26.33
