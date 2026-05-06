@@ -8,11 +8,13 @@ Leadership suspects that revenue may be heavily dependent on a relatively small 
 
 ## 🎯 Executive Summary
 
-Nearly half of Contoso’s revenue **43.5%** comes from just 20% of customers, creating significant concentration risk.
+Nearly half of Contoso’s revenue, **43.5%** comes from just 20% of customers, creating significant concentration risk.
 
-Within this segment, nearly half of customers are already inactive, while **1,421 Declining customers represent \$78.7M in revenue and \$44.2M in profit** still within retention reach.   
-
+Within this segment, nearly half of customers are already inactive, while **1,421 Declining customers represent \$78.7M in revenue and \$44.2M in profit** – still within retention reach.   
 The online channel alone holds **\$27.1M**—the single largest at-risk exposure. An additional **18 physical stores carry a combined $34M** in revenue risk, requiring coordinated localized retention action.
+
+Without intervention, retention becomes acquisition — and that cost is never linear.
+
 
 ## Key Findings & Business Implications
 
