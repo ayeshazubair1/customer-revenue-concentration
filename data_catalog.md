@@ -1,6 +1,6 @@
 ## Dataset Overview
-The Contoso dataset represents a large-scale fictional retail company operating across multiple countries and regions. It provides comprehensive transactional data capturing end-to-end retail operations, including customer orders, product sales, store performance, and multi-currency transactions. The dataset comprises 8 relational tables covering the full order fulfilment lifecycle.
-**Data Source**: The original raw CSV files can be downloaded from [here.](https://github.com/sql-bi/Contoso-Data-Generator-V2-data/releases/tag/ready-to-use-data) 
+The dataset represents a large-scale fictional company operating across multiple countries and regions. It provides comprehensive transactional data capturing end-to-end retail operations, including customer orders, product sales, store performance, and multi-currency transactions. The dataset comprises 8 relational tables covering the full order fulfilment lifecycle.
+**Data Source**: The original raw csv files can be downloaded from [here](https://github.com/sql-bi/Contoso-Data-Generator-V2-data/releases/tag/ready-to-use-data) 
 <br>
 <img src="docs/contoso_ERD.svg" width="700" alt="Vertical bar chart showing financial loss from shrinkage">
 <br>
@@ -35,7 +35,8 @@ After loading the data into the raw schema, quality checks were performed across
 <br>
 
 ### Table Description
-**Note**: `Order_Rows` table was excluded from the final model because its grain (order_key + product_key + line_number) and business content were fully covered by the `Sales` table. Since Sales contains the same line-level transactional detail along with additional attributes, keeping both tables would introduce redundancy without adding analytical value.
+**Note**: `Order_Rows` table was excluded from the final model because its grain (order_key + product_key + line_number) and business content were fully covered by the `Sales` table.
+<br>
 
 **Stores** — Contains information about each retail store, including location, size, and operational status. 
 Rows: **74**
@@ -51,6 +52,7 @@ Rows: **74**
 | description     | Name/description of the store |
 | geo_area_key    | Geographic area identifier |
 | square_meters   | Size of the store in square meters |
+
 <br>
 
 **Products** — Holds information about each product, including identifiers, descriptions, prices, and category details. 
