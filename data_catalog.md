@@ -1,5 +1,5 @@
 ## Dataset Overview
-The dataset represents a large-scale fictional company operating across multiple countries and regions. It provides comprehensive transactional data capturing end-to-end retail operations, including customer orders, product sales, store performance, and multi-currency transactions. The dataset comprises 8 relational tables covering the full order fulfilment lifecycle.
+The dataset represents a large-scale fictional company operating across multiple countries and regions. It provides comprehensive transactional data capturing end-to-end retail operations, including customer orders, product sales, store performance, and multi-currency transactions. The dataset comprises 8 relational tables covering the full order fulfilment lifecycle.   
 **Data Source**: The original raw csv files can be downloaded from [here](https://github.com/sql-bi/Contoso-Data-Generator-V2-data/releases/tag/ready-to-use-data) 
 <br>
 <img src="docs/contoso_ERD.svg" width="700" alt="Vertical bar chart showing financial loss from shrinkage">
