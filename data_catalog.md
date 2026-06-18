@@ -1,11 +1,13 @@
 ## Dataset Overview
 The dataset represents a large-scale fictional company operating across multiple countries and regions. It provides comprehensive transactional data capturing end-to-end retail operations, including customer orders, product sales, store performance, and multi-currency transactions. The dataset comprises 8 relational tables covering the full order fulfilment lifecycle.   
 **Data Source**: The original raw csv files can be downloaded from [here](https://github.com/sql-bi/Contoso-Data-Generator-V2-data/releases/tag/ready-to-use-data) 
-<br>
+
+<br> 
+
 <img src="docs/contoso_ERD.svg" width="700" alt="Vertical bar chart showing financial loss from shrinkage">
 <br>
-#### ⚠️ Data Load Issue — Customer Table
 
+#### ⚠️ Data Load Issue — Customer Table
 While loading `customer.csv`, the batch insert failed due to hidden null bytes (`\0`) present in 104,753 rows — invisible in editors like Excel but invalid in PostgreSQL UTF-8 encoding.
 
 **Fix:** Null bytes were stripped using the `tr` command before reloading:
