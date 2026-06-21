@@ -13,7 +13,7 @@ Within this segment, 49% of customers are already inactive, while **1,421 Declin
 
 Revenue risk is concentrated among a relatively small group of customers, channels, and locations rather than distributed across the business.   
 
-## Key Findings & Business Implications
+## Key Findings
 
 #### 1. Nearly Half of Contoso's Revenue Flows from Just 20% of Customers
 The top 20% of customers contribute **43.5% of total revenue** and **44.26% of total profit**. Within that group, the top 10% alone account for more than a quarter of both revenue and profit.   
@@ -79,7 +79,7 @@ The Online channel holds **\$27.1M at risk** across 1,420 declining customers, r
 | **Profit at Risk**                | $44.2M | Profit exposure if declining customers churn          |
 | **Largest Risk Channel (Online)** | $27.1M | Highest concentration of at-risk revenue              |
 
-## Tech Stack & Data Architecture
+## 🛠️ Tech Stack & Data Architecture
 **Tools:** PostgreSQL • DBeaver • Tableau    
 **Architecture:** Raw → Clean → Gold → Analysis
 ```text
@@ -109,7 +109,7 @@ Detailed documentation [here](data_catalog.md)
 **5. Multi-Currency Transactions:** Revenue figures were calculated in transaction currency without USD normalization. A post-analysis validation confirmed only a 1.47% net difference — findings remain directionally accurate.     
 **6. Synthetic Dataset:** Contoso is a fictional dataset. Additional context such as loyalty history, customer feedback, or campaign data was unavailable.    
 
-## Project Structure
+## 📁 Project Structure
 ```
 contoso/
 ├── docs/
