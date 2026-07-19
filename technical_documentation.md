@@ -62,5 +62,5 @@ After loading the data into the raw schema, quality checks were performed across
 **SQL Scripts:**  
 DDL [here](sql/01_ddl)    
 Database initialization [here](sql/db_init.sql)     
-Data Quality Checks [here](sql/02_test/quality_checks_raw.sql)     
+Data Quality Checks [here](sql/02_test)     
 Analytics queries [here](sql/03_analytics)
