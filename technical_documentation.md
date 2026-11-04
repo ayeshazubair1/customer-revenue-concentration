@@ -1,10 +1,13 @@
 > This document outlines the technical implementation of the project, from raw data ingestion and quality assessment to analytical modeling and SQL optimization.
 
 ## Dataset Overview
-A large-scale fictional company operating across multiple countries and regions. It provides comprehensive transactional data capturing end-to-end retail operations, including customer orders, product sales, store performance, and multi-currency transactions. The dataset comprises 8 relational tables covering the full order fulfilment lifecycle.    
-Download Dataset [here](https://github.com/sql-bi/Contoso-Data-Generator-V2-data/releases/tag/ready-to-use-data) 
+
+The dataset represents a fictional global retail business operating across multiple countries and regions. It contains transactional data covering customer orders, product sales, store operations, and currency exchange. The dataset consists of 8 relational tables supporting analysis across the retail business.      
+
+[Download Dataset](https://github.com/sql-bi/Contoso-Data-Generator-V2-data/releases/tag/ready-to-use-data) 
 
 ### Tech Stack & Data Architecture
+
 **Tools:** PostgreSQL • DBeaver • Tableau    
 **Architecture:** Raw → Clean → Gold → Analysis
 ```text
@@ -16,25 +19,30 @@ Gold Layer → Materialized view (customer_summary)
    ↓
 Analysis Layer → Views (high_value_customers, at_risk_customers)
 ```
-**Why this setup:** Separates raw data from business-ready model, improves performance, and ensures consistent metrics across analysis.
+**Why this setup:** Separates source data from transformed and analytical models, centralizes data standardization, and improves query performance through a reusable, pre-aggregated customer summary.
 
 <br> 
 
-<img src="docs/contoso_ERD.svg" width="700" alt="Vertical bar chart showing financial loss from shrinkage">
+<img src="docs/contoso_ERD.svg" width="700" alt="ERD showing the Contoso database tables and relationships">
 
 <br>
 
 ### Data Load Issue
-While loading `customer.csv`, the batch insert failed due to hidden null bytes (`\0`) present in 104,753 rows — invisible in editors like Excel but invalid in PostgreSQL UTF-8 encoding.
 
-**Fix:** Null bytes were stripped using the `tr` command before reloading:
+During the `customer.csv` import, PostgreSQL rejected the batch because the file contained hidden null bytes (`\0`) in 104,753 rows. These characters are not readily visible in spreadsheet editors but are invalid in PostgreSQL's UTF-8 text input.
+
+**Fix:** Removed the null bytes using the `tr` command before reloading the file.
 
 ```bash
 tr < customer.csv -d '\000' > customer_safe.csv
 ```
 ---
+
 ### Data Quality Assessment
-After loading the data into the raw schema, quality checks were performed across all tables. The data was largely clean, with only minor issues found around null values, inconsistent casing, and decimal precision.
+
+Following raw data ingestion, quality checks were performed across all tables to identify inconsistencies and issues affecting analytical reliability. The checks identified issues involving missing values, inconsistent formatting, and decimal precision, which were addressed through SQL transformations in the Clean layer.     
+
+**Issues Identified and Resolved:**
 
 | Table        | Column     | Issue                               | Fix Applied                                |
 |-------------------|------------------|-----------------------------------------------|-------------------------------------------|
@@ -49,18 +57,27 @@ After loading the data into the raw schema, quality checks were performed across
 | currency_exchange | exchange_rate    | Inconsistent decimal precision                | ROUND()                                   |
 | sales             | unit_price, net_price, unit_cost, exchange_rate   | Inconsistent decimal precision      | ROUND()            |
 
+---
+
 ## Analytical Methodology
-**1. Customer Summary Table:** Built as materialized view to support analysis and improve query performance.   
-**2. Customer Ranking:** `ROW_NUMBER()` used to identify top 10% and top 20% customers by revenue and profit.   
-**3. Analytical Views:** `high_value_customers` (top 20% by revenue) and `at_risk_customers` (Declining customer segment) standardized downstream analysis.   
-**4. Data-Driven Segmentation:** `PERCENTILE_CONT()` used to derive customer and store risk thresholds.   
-**5. Recency Logic:** Recency measured against the latest available date in the dataset (Dec 31, 2024).   
-**6. Query Design:** Used CTEs to simplify complex transformations and improve readability.     
+
+**1. Customer Summary Table:** Built `customer_summary` as a materialized view, aggregating transaction-level sales data into customer-level metrics to support downstream analysis and improve query performance.
+
+**2. Customer Ranking:** Used `ROW_NUMBER()` to rank customers by revenue and identify the top 10% and top 20% customer groups.
+
+**3. Analytical Views:** Created `high_value_customers` to define the top 20% of customers by revenue and `at_risk_customers` to identify customers within the Declining segment, providing standardized datasets for downstream analysis.
+
+**4. Behavioral Segmentation:**  Applied `PERCENTILE_CONT()` to derive recency and frequency thresholds, classifying high-value customers into Consistent, Stable, Declining, and Inactive segments.
+
+**5. Recency Calculation:** Measured customer recency against the latest recorded transaction date (April 20, 2024).
+
+**6. Query Design:** Used CTEs to organize multi-step transformations and improve query readability and maintainability.
 
 ---
 
 **SQL Scripts:**  
-DDL [here](sql/01_ddl)    
-Database initialization [here](sql/db_init.sql)     
-Data Quality Checks [here](sql/02_test)     
-Analytics queries [here](sql/03_analytics)
+
+- **DDL** [View scripts](sql/01_ddl)    
+- **Database Initialization** [View script](sql/db_init.sql)     
+- **Data Quality Checks** [View scripts](sql/02_test)     
+- **Analytical Queries** [View scripts](sql/03_analytics)
