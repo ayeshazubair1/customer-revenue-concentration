@@ -1,5 +1,5 @@
 /*=======================================================================================
-LAYER: Clean / Standardized Views
+LAYER: Clean (Standardized Views)
 Schema: clean
 Purpose: 
 	- Creates transformed views, derived from the source tables in the 'raw' schema
@@ -13,6 +13,7 @@ Usage:
  -- ============================
 -- 1) clean.stores
  -- ============================
+ 
 CREATE OR REPLACE VIEW clean.stores AS
 SELECT
     "StoreKey"                                       ::INTEGER       AS store_key,      -- PK

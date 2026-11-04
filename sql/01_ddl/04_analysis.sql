@@ -1,5 +1,5 @@
 /*=======================================================================================
-LAYER: Analysis / Reusable Business Views
+LAYER: Analysis (Reusable Business Views)
 Schema: analysis
 Purpose:
     - Stores reusable business logic (e.g., churn risk, segmentation)
@@ -17,13 +17,14 @@ NOTE:
 --====================================================================
 -- Top 20% High-Value Customers (Based on Business Question 2)
 --====================================================================
+
 -- DROP VIEW analysis.high_value_customers;
 CREATE OR REPLACE VIEW analysis.high_value_customers AS
 WITH customer_rank AS (
 	SELECT 
 		customer_key,
 		customer_name,
-		ROW_NUMBER() OVER(ORDER BY total_revenue DESC) AS rn
+		ROW_NUMBER() OVER(ORDER BY total_revenue DESC, customer_key) AS rn
 	FROM gold.customer_summary
 ),
 threshold AS (
@@ -32,9 +33,8 @@ threshold AS (
 	FROM gold.customer_summary 
 ),
 max_date AS (
-	SELECT
-		MAX(date) AS max_date
-	FROM clean.date
+    SELECT MAX(last_order_date) AS max_date
+    FROM gold.customer_summary
 ),
 metrics AS (
 	SELECT 
@@ -42,8 +42,8 @@ metrics AS (
 		cs.customer_name,
 		cs.total_revenue,
 		cs.total_profit,
-		(max_date - last_order_date) 				 AS recency,
-		cs.total_orders 							 AS frequency,
+		(max_date - last_order_date) AS recency,
+		cs.total_orders 		  	 AS frequency,
 		ROUND(cs.total_revenue / cs.total_orders, 2) AS aov
 	FROM gold.customer_summary cs
 	JOIN customer_rank cr ON cs.customer_key = cr.customer_key 
@@ -57,6 +57,7 @@ SELECT * FROM metrics
 --==================================================================
 -- Customers Likely to Disengage (Based on Business Question 3)
 --==================================================================
+
 -- DROP VIEW analysis.at_risk_customers;
 CREATE OR REPLACE VIEW analysis.at_risk_customers AS
 WITH percentile AS (

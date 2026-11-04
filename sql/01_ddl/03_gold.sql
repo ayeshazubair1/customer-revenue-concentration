@@ -1,12 +1,12 @@
 /*=======================================================================================
-LAYER: Gold / Aggregated Summary Layer
+LAYER: Gold (Aggregated Summary Layer)
 Schema: gold
 Purpose: 
     - Creates aggregated customer-level summary table derived from clean data
     - Precomputes key metrics (revenue, cost, profit etc)
 
 Usage:
-    - Run this script to create or refresh summary table / materialized views
+    - Run this script to create or refresh summary table (materialized view)
     - Used as the primary source for downstream analysis and reporting
 =======================================================================================*/
 

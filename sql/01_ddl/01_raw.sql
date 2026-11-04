@@ -1,5 +1,5 @@
 /*=====================================================================================
-LAYER: Raw / Source (DATA INGESTION)
+LAYER: Raw (DATA INGESTION)
 Schema: raw
 Purpose: 
 		- Defines raw ingestion tables that mirror source files exactly
@@ -11,6 +11,7 @@ Usage:
 -- ============================
 -- 1) raw.store
 -- ============================
+
 DROP TABLE IF EXISTS raw.store;
 CREATE TABLE raw.store (
     "StoreKey"     int4        NULL,
@@ -29,6 +30,7 @@ CREATE TABLE raw.store (
 -- ============================
 -- 2) raw.product
 -- ============================
+
 DROP TABLE IF EXISTS raw.product;
 CREATE TABLE raw.product (
     "ProductKey"      int4        NULL,
@@ -50,6 +52,7 @@ CREATE TABLE raw.product (
 -- ============================
 -- 3) raw.customer
 -- ============================
+
 DROP TABLE IF EXISTS raw.customer;
 CREATE TABLE raw.customer (
     customerkey   int4        NULL,
@@ -81,6 +84,7 @@ CREATE TABLE raw.customer (
 -- ============================
 -- 4) raw.date
 -- ============================
+
 DROP TABLE IF EXISTS raw."date";
 CREATE TABLE raw."date" (
     "Date"              varchar(50) NULL,
@@ -105,6 +109,7 @@ CREATE TABLE raw."date" (
 -- ============================
 -- 5) raw.orders
 -- ============================
+
 DROP TABLE IF EXISTS raw.orders;
 CREATE TABLE raw.orders (
     "OrderKey"     int4        NULL,
@@ -118,6 +123,7 @@ CREATE TABLE raw.orders (
 -- ============================
 -- 6) raw.currencyexchange
 -- ============================
+
 DROP TABLE IF EXISTS raw.currencyexchange;
 CREATE TABLE raw.currencyexchange (
     "Date"         varchar(50) NULL,
@@ -129,6 +135,7 @@ CREATE TABLE raw.currencyexchange (
 -- ============================
 -- 7) raw.orderrows
 -- ============================
+
 DROP TABLE IF EXISTS raw.orderrows;
 CREATE TABLE raw.orderrows (
     "OrderKey"   int4   NULL,
@@ -143,6 +150,7 @@ CREATE TABLE raw.orderrows (
 -- ============================
 -- 8) raw.sales
 -- ============================
+
 DROP TABLE IF EXISTS raw.sales;
 CREATE TABLE raw.sales (
     "OrderKey"     int4        NULL,

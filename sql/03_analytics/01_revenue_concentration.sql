@@ -28,8 +28,8 @@ WITH customer_rank AS (
 		customer_key,
 		total_revenue,
 		total_profit,
-		ROW_NUMBER() OVER(ORDER BY total_revenue DESC) AS rn_revenue,
-		ROW_NUMBER() OVER(ORDER BY total_profit  DESC) AS rn_profit
+		ROW_NUMBER() OVER(ORDER BY total_revenue DESC, customer_key) AS rn_revenue,
+		ROW_NUMBER() OVER(ORDER BY total_profit DESC, customer_key) AS rn_profit
 	FROM gold.customer_summary 
 ),
 threshold AS (

@@ -1,13 +1,12 @@
 /*=====================================================================================
--- BUSINESS QUESTION: How Much Revenue Is at Risk from Potential Churn?
+-- BUSINESS QUESTION: How Much High-Value Customer Revenue Is at Risk?
 
 -- PURPOSE:
---   Identify customers likely to disengage and quantify the revenue and profit
---   exposure if they churn.
+--   Identify high-value customers showing signs of disengagement and quantify
+--   the revenue and profit exposure within this customer segment.
 
 -- DATA & SCOPE:
 --   - High-Value Customers View (Top 20% by revenue)
---   - Customer Summary table (aggregated at customer level)
 
 -- APPROACH:
 --   1. Use the High-Value Customers view to access pre-calculated R/F/M metrics
@@ -46,7 +45,7 @@ WITH totals AS (
 	SELECT
 		SUM(total_revenue) AS revenue,
 		SUM(total_profit)  AS profit
-	FROM gold.customer_summary
+	FROM analysis.high_value_customers
 )	
 SELECT
 	COUNT(*) 									   AS at_risk_customer_count,
@@ -60,10 +59,11 @@ GROUP BY
 	revenue,
 	profit
 ;
+
 --==============================
 /*	Output:
 --==============================
 at_risk_customer_count|revenue_at_risk|revenue_at_risk_pct|profit_at_risk|profit_at_risk_pct
 ----------------------+---------------+-------------------+--------------+------------------
-                  1421|    78742833.40|               3.71|   44201613.16|              3.73
+                  1421|    78742833.40|               8.53|   44201613.16|              8.44
 */

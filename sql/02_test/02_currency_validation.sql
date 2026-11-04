@@ -1,5 +1,5 @@
 /*===============================================================================
-LAYER:  Clean / Validation
+LAYER:  Clean (Validation)
 Schema: clean
 Purpose:
     - Quantifies the financial impact of multi-currency transactions
@@ -12,6 +12,7 @@ Usage Notes:
 
 -- Check:  Revenue impact by currency — raw vs USD-normalized per currency code
 -- Result: EUR/GBP overstated, CAD/AUD understated due to no normalization
+
 SELECT 
     currency_code,
     COUNT(*)                                            AS total_rows,
@@ -24,6 +25,7 @@ FROM sales
 GROUP BY currency_code
 ORDER BY raw_revenue DESC
 ;
+
 --=========================
 /*	Output:
 --=========================
@@ -37,6 +39,7 @@ AUD           | 125,090    | 5.96         | 124,551,161.99     | 87,746,805.72  
 
 -- Check:  Net revenue difference across all currencies combined
 -- Result: 1.47% total deviation — overstatements and understatements offset each other
+
 SELECT
     ROUND(SUM(net_price * quantity), 2)                 AS raw_revenue,
     ROUND(SUM(net_price * quantity / exchange_rate), 2) AS usd_normalized_revenue,
@@ -47,6 +50,7 @@ SELECT
         / SUM(net_price * quantity) * 100, 2)           AS pct_difference
 FROM sales
 ;
+
 --=========================
 /*	Output:
 --=========================

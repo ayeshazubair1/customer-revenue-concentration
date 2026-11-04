@@ -12,7 +12,8 @@
 -- APPROACH:
 --   1. Select the top 20% high-value customers ranked by total revenue
 --   2. Calculate Recency, Frequency, and Average Order Value (AOV)
---   3. Use percentile-based thresholds to segment customers into behavioral groups
+--   3. Apply P50 and P75 percentile thresholds on recency and frequency
+--      to classify customers into four behavioral segments
 
 -- ASSUMPTIONS & NOTES:
 --   - Recency is measured as the gap between the latest business date and last order date
@@ -31,7 +32,7 @@ WITH customer_rank AS (
 	SELECT 
 		customer_key,
 		customer_name,
-		ROW_NUMBER() OVER(ORDER BY total_revenue DESC) AS rn
+		ROW_NUMBER() OVER(ORDER BY total_revenue DESC, customer_key) AS rn
 	FROM gold.customer_summary
 ),
 threshold AS (
@@ -40,9 +41,8 @@ threshold AS (
 	FROM gold.customer_summary 
 ),
 max_date AS (
-	SELECT
-		MAX(date) AS max_date
-	FROM clean.date
+    SELECT MAX(last_order_date) AS max_date
+    FROM gold.customer_summary
 ),
 metrics AS (
 	SELECT 
@@ -101,6 +101,7 @@ ORDER BY
 		ELSE 4
 	END
 ;
+
 --==============================
 /*	Output:
 --==============================
