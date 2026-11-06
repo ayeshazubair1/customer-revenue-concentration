@@ -23,7 +23,7 @@ Analysis Layer → Views (high_value_customers, at_risk_customers)
 
 <br> 
 
-<img src="docs/contoso_ERD.svg" width="700" alt="ERD showing the Contoso database tables and relationships">
+<img src="docs/contoso_ERD.svg" width="700" alt="Contoso ERD">
 
 <br>
 
